@@ -1,7 +1,7 @@
-package com.vizz.microjournal.service;
+package com.vzerd.microjournal.Service;
 
-import com.vizz.microjournal.model.Users;
-import com.vizz.microjournal.repository.UsersRepository;
+import com.vzerd.microjournal.Model.UserModel;
+import com.vzerd.microjournal.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
@@ -12,16 +12,16 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public class AuthRESTService {
+public class AuthService {
 
-    UsersRepository userRepository;
+    UserRepository userRepository;
     @Autowired
-    AuthRESTService(UsersRepository userRepository){
+    AuthService(UserRepository userRepository){
         this.userRepository = userRepository;
     }
 
     @Transactional
-    public ResponseEntity<String> signUpService(Users user){
+    public ResponseEntity<String> signUpService(UserModel user){
 
         if(user.getName() == null || user.getName().isBlank() ||
                 user.getEmail() == null || user.getEmail().isBlank() ||
@@ -54,7 +54,7 @@ public class AuthRESTService {
     }
 
     @Transactional
-    public ResponseEntity<String> signInService(Users user){
+    public ResponseEntity<String> signInService(UserModel user){
 
         if(user.getEmail() == null || user.getEmail().isBlank() ||
                 user.getPassword() == null || user.getPassword().isBlank()){
@@ -91,7 +91,7 @@ public class AuthRESTService {
     }
 
     @Transactional
-    public ResponseEntity<String> signOutService(Users user){
+    public ResponseEntity<String> signOutService(UserModel user){
 
         if(user.getToken() == null || user.getToken().toString().isBlank()){
             return new ResponseEntity<>("{\"payload\":\"Associated token is missing/empty in request-body.\"}",
@@ -112,7 +112,7 @@ public class AuthRESTService {
     }
 
     @Transactional
-    public ResponseEntity<String> deleteAccountService(Users user){
+    public ResponseEntity<String> deleteAccountService(UserModel user){
 
         if(user.getToken() == null || user.getToken().toString().isBlank()){
             return new ResponseEntity<>("{\"payload\":\"Associated token is missing/empty in request-body.\"}",

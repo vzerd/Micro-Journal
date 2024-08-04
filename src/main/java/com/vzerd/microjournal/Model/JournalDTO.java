@@ -1,4 +1,4 @@
-package com.vizz.microjournal.model;
+package com.vzerd.microjournal.Model;
 
 import java.sql.Date;
 import java.util.UUID;
@@ -11,6 +11,7 @@ public class JournalDTO {
     public UUID getToken() {
         return token;
     }
+
     public void setToken(UUID token) {
         this.token = token;
     }
@@ -18,6 +19,7 @@ public class JournalDTO {
     public Date getDate() {
         return date;
     }
+
     public void setDate(Date date) {
         this.date = date;
     }
@@ -25,6 +27,7 @@ public class JournalDTO {
     public String getJournal() {
         return journal;
     }
+
     public void setJournal(String journal) {
         this.journal = journal;
     }

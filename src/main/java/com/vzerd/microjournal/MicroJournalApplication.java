@@ -1,4 +1,4 @@
-package com.vizz.microjournal;
+package com.vzerd.microjournal;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

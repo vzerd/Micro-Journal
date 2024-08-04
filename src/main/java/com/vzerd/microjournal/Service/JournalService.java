@@ -1,9 +1,9 @@
-package com.vizz.microjournal.service;
+package com.vzerd.microjournal.Service;
 
-import com.vizz.microjournal.model.JournalDTO;
-import com.vizz.microjournal.model.Journals;
-import com.vizz.microjournal.repository.JournalRepository;
-import com.vizz.microjournal.repository.UsersRepository;
+import com.vzerd.microjournal.Model.JournalDTO;
+import com.vzerd.microjournal.Model.JournalModel;
+import com.vzerd.microjournal.Repository.JournalRepository;
+import com.vzerd.microjournal.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
@@ -14,14 +14,14 @@ import java.sql.Date;
 import java.util.UUID;
 
 @Service
-public class JournalRESTService {
+public class JournalService {
 
     JournalRepository journalRepository;
-    UsersRepository usersRepository;
+    UserRepository userRepository;
     @Autowired
-    JournalRESTService(JournalRepository journalRepository, UsersRepository usersRepository){
+    JournalService(JournalRepository journalRepository, UserRepository userRepository){
         this.journalRepository = journalRepository;
-        this.usersRepository = usersRepository;
+        this.userRepository = userRepository;
     }
 
     @Transactional
@@ -32,10 +32,10 @@ public class JournalRESTService {
             return new ResponseEntity<>("{\"payload\":\"Field(s) is/are incomplete or empty.\"}",
                     HttpStatus.valueOf(406));
         }
-        Journals journal = new Journals();
+        JournalModel journal = new JournalModel();
         journal.setDay(journalDTO.getDate());
         try{
-            Integer uidValue = usersRepository.getIdByToken(journalDTO.getToken());
+            Integer uidValue = userRepository.getIdByToken(journalDTO.getToken());
             if(uidValue == null){
                 return new ResponseEntity<>("{\"payload\":\"Given token is not found.\"}",
                         HttpStatus.valueOf(404));
@@ -68,10 +68,10 @@ public class JournalRESTService {
             return new ResponseEntity<>("{\"payload\":\"Field(s) is/are incomplete or empty.\"}",
                     HttpStatus.valueOf(406));
         }
-        Journals journal = new Journals();
+        JournalModel journal = new JournalModel();
         journal.setDay(journalDTO.getDate());
         try{
-            Integer uidValue = usersRepository.getIdByToken(journalDTO.getToken());
+            Integer uidValue = userRepository.getIdByToken(journalDTO.getToken());
             if(uidValue == null){
                 return new ResponseEntity<>("{\"payload\":\"Given token is not found.\"}",
                         HttpStatus.valueOf(404));
@@ -101,7 +101,7 @@ public class JournalRESTService {
                     HttpStatus.valueOf(406));
         }
         try{
-            Integer uidValue = usersRepository.getIdByToken(UUID.fromString(token));
+            Integer uidValue = userRepository.getIdByToken(UUID.fromString(token));
             if(uidValue == null){
                 return new ResponseEntity<>("{\"payload\":\"Given token is not found.\"}",
                         HttpStatus.valueOf(404));
@@ -129,7 +129,7 @@ public class JournalRESTService {
                     HttpStatus.valueOf(406));
         }
         try{
-            Integer uidValue = usersRepository.getIdByToken(journalDTO.getToken());
+            Integer uidValue = userRepository.getIdByToken(journalDTO.getToken());
             if(uidValue == null){
                 return new ResponseEntity<>("{\"payload\":\"Given token is not found.\"}",
                         HttpStatus.valueOf(404));

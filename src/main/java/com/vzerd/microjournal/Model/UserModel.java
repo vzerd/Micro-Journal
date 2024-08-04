@@ -1,11 +1,11 @@
-package com.vizz.microjournal.model;
+package com.vzerd.microjournal.Model;
 
 import jakarta.persistence.*;
 import java.util.Base64;
 import java.util.UUID;
 
 @Entity
-public class Users {
+public class UserModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -17,6 +17,7 @@ public class Users {
     public int getID() {
         return id;
     }
+
     public void setID(int id) {
         this.id = id;
     }
@@ -24,6 +25,7 @@ public class Users {
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -31,6 +33,7 @@ public class Users {
     public String getEmail() {
         return email;
     }
+
     public void setEmail(String email) {
         this.email = email;
     }
@@ -38,6 +41,7 @@ public class Users {
     public String getPassword() {
         return password;
     }
+
     public void setPassword(String password) {
         this.password = password;
     }
@@ -45,6 +49,7 @@ public class Users {
     public UUID getToken() {
         return token;
     }
+
     public void setToken(UUID token) {
         this.token = token;
     }
@@ -52,12 +57,15 @@ public class Users {
     public void trimName(){
         this.name = this.name.trim();
     }
+
     public void trimEmail(){
         this.email = this.email.trim();
     }
+
     public void trimPassword(){
         this.password = this.password.trim();
     }
+
     public void encodePassword(){
         this.password = Base64.getEncoder().encodeToString(this.password.getBytes());
     }
